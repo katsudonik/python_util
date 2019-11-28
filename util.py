@@ -346,3 +346,22 @@ def freeze_header(df, num_rows=30, num_columns=10, step_rows=1,
         display(df.iloc[max(0, last_row-num_rows):last_row,
                         max(0, last_column-num_columns):last_column])
 
+
+        
+    def solve2(a, b, c):
+        _d = b**2 - 4*a*c
+        if _d < 0:
+            return np.array([])
+        return np.array([(-b + np.sqrt(_d) ) / (2*a), (-b - np.sqrt(_d) ) / (2*a)])
+    
+     def solve2_positive(f, var_x):
+        a =  np.array([f.coeff(var_x, 2)], dtype='float')
+        b =  np.array([f.coeff(var_x, 1)], dtype='float')
+        c =  np.array([f.coeff(var_x, 0)], dtype='float')
+        solved = solve2(a,b,c)
+        positive_solved = solved[solved >= 0]
+        if len(positive_solved) == 0:
+            return None
+        return positive_solved.min()
+
+    
